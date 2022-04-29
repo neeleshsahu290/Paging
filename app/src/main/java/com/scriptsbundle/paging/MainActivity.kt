@@ -6,10 +6,13 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.scriptsbundle.paging.databinding.ActivityMainBinding
+import com.scriptsbundle.paging.db.UserDatabase
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewmodel: MainViewmodel
     private lateinit var binding: ActivityMainBinding
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,12 +24,14 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun getusers(){
-        viewmodel.getanswers()
+        viewmodel.getanswers(this@MainActivity)
         viewmodel.data.observe(this){
-            val list = it.items
+
+            val list = it
 
             if (list!=null ){
                 if (list.size>0) {
+
                     binding.recycleruser.adapter = UserAdapter(list,this@MainActivity)
                     binding.progressbar.visibility = View.GONE
                     binding.recycleruser.visibility = View.VISIBLE

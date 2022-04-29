@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.scriptsbundle.paging.databinding.UserCardViewBinding
+import com.scriptsbundle.paging.db.User
 import com.scriptsbundle.paging.modelclass.Item
 
-class UserAdapter(val itemlist:ArrayList<Item>?=null,val context: Context): RecyclerView.Adapter<UserAdapter.userviewholder> (){
+class UserAdapter(val itemlist:ArrayList<User>?=null, val context: Context): RecyclerView.Adapter<UserAdapter.userviewholder> (){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): userviewholder {
@@ -18,8 +19,8 @@ class UserAdapter(val itemlist:ArrayList<Item>?=null,val context: Context): Recy
 
     override fun onBindViewHolder(holder: userviewholder, position: Int) {
         val list = itemlist?.get(position)
-        holder.binding.textname.text=list?.owner?.display_name
-        val url = list?.owner?.profile_image
+        holder.binding.textname.text=list?.display_name
+        val url = list?.profile_image
         Glide
             .with(context)
             .load(url)
